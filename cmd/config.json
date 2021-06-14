@@ -1,0 +1,31 @@
+{
+	"transport": {
+		"http_port": "30012"
+	},
+	"mongo": {
+		"credential": {
+			"user_name": "",
+			"password": ""
+		},
+		"address": "localhost:27017",
+		"db_name": "RupamDB"
+	},
+	"aws": {
+        "region": "ap-south-1",
+        "credential": {
+            "credential_type": "SharedConfig",
+            "profile_name": "RUPAM"
+        },
+        "s3": {
+			"exercise_content_bucket":"",
+            "put_req_expiry_signer_in_sec": 3600,
+			"exercisecontent_bucket_prefix_path":""
+        }
+    },
+    
+	"logging": {
+		"file_path": "log/log.txt"
+	}
+}
+
+
