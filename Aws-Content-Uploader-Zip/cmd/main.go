@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	config "repos/AwsContentUploader"
-	"repos/AwsContentUploader/cuploader"
-	contentuploader "repos/AwsContentUploader/upload"
+	config "repos/Golang-Aws-Services/Aws-Content-Uploader-Zip"
+	"repos/Golang-Aws-Services/Aws-Content-Uploader-Zip/cuploader"
+	contentuploader "repos/Golang-Aws-Services/Aws-Content-Uploader-Zip/upload"
 	"syscall"
 	"time"
 

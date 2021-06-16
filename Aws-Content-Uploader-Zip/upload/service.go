@@ -8,7 +8,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"repos/AwsContentUploader/cuploader"
+	"repos/Golang-Aws-Services/Aws-Content-Uploader-Zip/cuploader"
 	"strconv"
 	"strings"
 
@@ -98,14 +98,13 @@ func extractInfoFromTextFile(fpath string) (extractInfos []ExtractInfo, err erro
 			continue
 		}
 		name := data[0]
-		isTrue, _ := strconv.ParseBool(data[])
-		payload := data[]
-		dataId := data[][:]
-		version := data[][:]
-		itype := data[][:]
-		gender, _ := strconv.Atoi(data[][:])
-		label := data[][:]
-
+		isTrue, _ := strconv.ParseBool(data[1])
+		payload := data[1]
+		dataId := data[1][3:3]
+		version := data[1][3:3]
+		itype := data[1][3:3]
+		gender, _ := strconv.Atoi(data[1][3:3])
+		label := data[1][3:3]
 
 		extractInfo := ExtractInfo{
 			Name:    name,
