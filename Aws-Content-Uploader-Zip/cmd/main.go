@@ -18,8 +18,7 @@ import (
 	"golang.org/x/net/context"
 )
 
-// /home/rupam/go/src/repos/Go-Lang-Backend-NoSQL-MySQL/AwsContentUploader/config.go
-
+//  /home/rupam/go/src/repos/Golang-Aws-Services/Aws-Content-Uploader-Zip/config.go
 const cfgPath = "config.json"
 
 func main() {
@@ -27,8 +26,7 @@ func main() {
 	ctx := context.Background()
 	logger = log.NewJSONLogger(os.Stderr)
 	httpLogger := log.With(logger, "component", "http")
-	c := config.Configure(cfgPath)
-	//fieldKeys := []string{"method"}
+	c := config.Configure(cfgPath) // configure Function written in config,go
 	awsSession, _ := session.NewSession(&aws.Config{
 		Region:      aws.String(c.AWS.Region),
 		Credentials: credentials.NewSharedCredentials("", c.AWS.Credential.ProfileName),
