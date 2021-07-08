@@ -116,4 +116,56 @@ func main() {
 	// fmt.Println(ListobjectsInsideOfBucket())
 	// downloadObjectFromBucket("a1.png")
 	// fmt.Println(DeleteObjectFromBucket("a1.png"))
+	folder := "assets"
+	files, _ := ioutil.ReadDir(folder)
+	for _, file := range files {
+		if file.IsDir() {
+			continue
+		} else {
+			UploadObject(folder + "/" + file.Name())
+		}
+	}
+	fmt.Println(ListobjectsInsideOfBucket())
+	for _, object := range ListobjectsInsideOfBucket().Contents {
+		downloadObjectFromBucket(*object.Key)
+		DeleteObjectFromBucket(*object.Key)
+	}
 }
+
+// OUTPUT:
+
+// uploading this file  assets/a1.png  ...
+// uploading this file  assets/s.png  ...
+// uploading this file  assets/video.png  ...
+// {
+//   Contents: [{
+//       ETag: "\"1ffcd585035f9325d66725ae7906ee8f\"",
+//       Key: "a1.png",
+//       LastModified: 2021-07-08 10:17:51 +0000 UTC,
+//       Size: 177923,
+//       StorageClass: "STANDARD"
+//     },{
+//       ETag: "\"14b3209a0bdb3f40dc4b00532064b88b\"",
+//       Key: "s.png",
+//       LastModified: 2021-07-08 10:17:52 +0000 UTC,
+//       Size: 1985,
+//       StorageClass: "STANDARD"
+//     },{
+//       ETag: "\"6d646ecd4eb652f5202d460902e30f79\"",
+//       Key: "video.png",
+//       LastModified: 2021-07-08 10:17:52 +0000 UTC,
+//       Size: 11334,
+//       StorageClass: "STANDARD"
+//     }],
+//   IsTruncated: false,
+//   KeyCount: 3,
+//   MaxKeys: 1000,
+//   Name: "test.rupam.bucket",
+//   Prefix: ""
+// }
+// Downloading this file  a1.png  ...
+// Deleteing...
+// Downloading this file  s.png  ...
+// Deleteing...
+// Downloading this file  video.png  ...
+// Deleteing...
