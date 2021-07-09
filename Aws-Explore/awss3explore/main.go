@@ -24,7 +24,7 @@ const (
 func init() {
 	s3session = s3.New(session.Must(session.NewSession(&aws.Config{
 		Region:      aws.String("ap-south-1"),
-		Credentials: credentials.NewSharedCredentials("", "tsm"),
+		Credentials: credentials.NewSharedCredentials("", "user_rupam"),
 	})))
 }
 func ListBucket() *s3.ListBucketsOutput {
@@ -64,7 +64,7 @@ func UploadObject(name string) *s3.PutObjectOutput {
 	fmt.Println("uploading this file ", name, " ...")
 	response, err := s3session.PutObject(&s3.PutObjectInput{
 		Body:   f,
-		Bucket: aws.String("test.rupam.bucket"),
+		Bucket: aws.String("test.userrupam.bucket"),
 		Key:    aws.String(strings.Split(name, "/")[1]),
 		ACL:    aws.String(s3.BucketCannedACLPublicRead),
 	})
@@ -75,7 +75,7 @@ func UploadObject(name string) *s3.PutObjectOutput {
 }
 func ListobjectsInsideOfBucket() *s3.ListObjectsV2Output {
 	response, err := s3session.ListObjectsV2(&s3.ListObjectsV2Input{
-		Bucket: aws.String("test.rupam.bucket"),
+		Bucket: aws.String("test.userrupam.bucket"),
 	})
 	if err != nil {
 		panic(err)
@@ -85,7 +85,7 @@ func ListobjectsInsideOfBucket() *s3.ListObjectsV2Output {
 func downloadObjectFromBucket(name string) {
 	fmt.Println("Downloading this file ", name, " ...")
 	response, err := s3session.GetObject(&s3.GetObjectInput{
-		Bucket: aws.String("test.rupam.bucket"),
+		Bucket: aws.String("test.userrupam.bucket"),
 		Key:    aws.String(name),
 	})
 	if err != nil {
@@ -101,7 +101,7 @@ func downloadObjectFromBucket(name string) {
 func DeleteObjectFromBucket(name string) *s3.DeleteObjectOutput {
 	fmt.Println("Deleteing...")
 	response, err := s3session.DeleteObject(&s3.DeleteObjectInput{
-		Bucket: aws.String("test.rupam.bucket"),
+		Bucket: aws.String("test.userrupam.bucket"),
 		Key:    aws.String(name),
 	})
 	if err != nil {
@@ -110,26 +110,26 @@ func DeleteObjectFromBucket(name string) *s3.DeleteObjectOutput {
 	return response
 }
 func main() {
-	// fmt.Println(CreateBucket("test.rupam.bucket"))
+	// fmt.Println(CreateBucket("test.userrupam.bucket"))
 	// fmt.Println(ListBucket())
 	// fmt.Println(UploadObject("assets/a1.png"))
 	// fmt.Println(ListobjectsInsideOfBucket())
-	// downloadObjectFromBucket("a1.png")
+	// downloadObjectFromBucket("teacher.png")
 	// fmt.Println(DeleteObjectFromBucket("a1.png"))
-	folder := "assets"
-	files, _ := ioutil.ReadDir(folder)
-	for _, file := range files {
-		if file.IsDir() {
-			continue
-		} else {
-			UploadObject(folder + "/" + file.Name())
-		}
-	}
-	fmt.Println(ListobjectsInsideOfBucket())
-	for _, object := range ListobjectsInsideOfBucket().Contents {
-		downloadObjectFromBucket(*object.Key)
-		DeleteObjectFromBucket(*object.Key)
-	}
+	// folder := "assets"
+	// files, _ := ioutil.ReadDir(folder)
+	// for _, file := range files {
+	// 	if file.IsDir() {
+	// 		continue
+	// 	} else {
+	// 		UploadObject(folder + "/" + file.Name())
+	// 	}
+	// }
+	// fmt.Println(ListobjectsInsideOfBucket())
+	// for _, object := range ListobjectsInsideOfBucket().Contents {
+	// 	downloadObjectFromBucket(*object.Key)
+	// 	// DeleteObjectFromBucket(*object.Key)
+	// }
 }
 
 // OUTPUT:
